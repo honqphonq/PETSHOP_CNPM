@@ -198,7 +198,7 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h2 class="pageheader-title">Thêm sản phẩm</h2>
+                                <h2 class="pageheader-title">Cập nhật sản phẩm</h2>
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
@@ -225,6 +225,7 @@
                                     <label for="validationServer01" class="form-label">Tên sản phẩm:</label>
                                     <input type="text" name="productname" class="form-control" id="validationServer01"
                                         value="<%= product.productName %>" required />
+                                    <div id="checkValidate"></div>
                                 </div>
                                 <div class="col-sm-12 col-md-12 col-lg-12 my-3">
                                     <label for="validationServer01" class="form-label">Nội dung mô tả:</label>
@@ -308,7 +309,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary mt-3" type="submit">
+                                    <button class="btn btn-primary mt-3" type="submit" onclick="checkValidateAddCategory(event)">
                                         Cập nhât thông tin sản phẩm
                                     </button>
                                 </div>
@@ -358,6 +359,29 @@
             });
         });
     </script>
+
+    <script>
+        function checkValidateAddCategory(event){
+            var checkName = document.getElementById("validationServer01").value;
+            var checkNameError = document.getElementById("checkValidate");
+
+            if(checkName == ''){
+                event.preventDefault();
+                checkNameError.innerHTML = "Vui lòng nhập đủ thông tin"
+                checkNameError.classList.add("errorText");
+            }
+            else if(checkName.length > 25){
+                event.preventDefault();
+                checkNameError.innerHTML = "Độ dài quá 25 ký tự"
+                checkNameError.classList.add("errorText");
+            }
+        }
+    </script>
+    <style>
+        .errorText{
+            color: red;
+        }
+    </style>
 </body>
 
 </html>

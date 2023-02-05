@@ -164,11 +164,13 @@
                                     <label for="validationServer01" class="form-label">Tên khách hàng:</label>
                                     <input type="text" name="name" class="form-control" id="validationServer01"
                                         value="<%= bill.displayName.firstName + ' ' + bill.displayName.lastName%>" required />
+                                    <div id="checkValidate"></div>
                                 </div>
                                 <label for="validationServer01" class="form-label col-12">Địa chỉ nhận hàng:</label>
                                 <div class="col-12 col-md-4 col-lg-4">
                                     <select name="city" class="form-select form-select-sm my-3" style="width: 300px;padding: 10px; outline: none; display: inline-block; color: #71748d; width: -moz-available;" id="city" aria-label=".form-select-sm">
-                                        <option value="none" selected>Chọn tỉnh thành</option>           
+                                        <option value="none" selected id="selectedProvince">Chọn tỉnh thành</option>    
+                                        <div id="checkProvince"></div>       
                                     </select>
                                 </div>
                                 <div class="col-12 col-md-4 col-lg-4">
@@ -216,7 +218,7 @@
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary mt-3" type="submit">
+                                    <button class="btn btn-primary mt-3" type="submit" onclick="checkValidateAddCategory(event)">
                                         Cập nhật thông tin đơn hàng
                                     </button>
                                 </div>
@@ -249,6 +251,46 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script src="/public/js/address.js"></script>
+
+    <script>
+        function checkValidateAddCategory(event){
+            var checkName = document.getElementById("validationServer01").value;
+            var checkNameError = document.getElementById("checkValidate");
+            //check province empty
+            var checkProvince = document.getElementsByClassName("name").value;
+            console.log(checkProvince);
+
+            var checkProvinceError = document.getElementById("checkProvince");
+
+            if(checkName == ''){
+                event.preventDefault();
+                checkNameError.innerHTML = "Vui lòng nhập đủ thông tin"
+                checkNameError.classList.add("errorText");
+
+                checkProvince.innerHTML = "Vui lòng chọn thông tin tỉnh thành"
+                checkProvince.classList.add("errorText");
+
+            }
+            else if(checkName.length > 25){
+                event.preventDefault();
+                checkNameError.innerHTML = "Độ dài quá 25 ký tự"
+                checkNameError.classList.add("errorText");
+            }
+
+            if(checkProvince == 'Chọn tỉnh thành'){
+                event.preventDefault();
+                checkProvince.innerHTML = "Vui lòng chọn thông tin tỉnh thành"
+                checkProvince.classList.add("errorText");
+            }
+
+            console.log("avadfasdfafafa" + checkProvince);
+        }
+    </script>
+    <style>
+        .errorText{
+            color: red;
+        }
+    </style>
 </body>
 
 </html>

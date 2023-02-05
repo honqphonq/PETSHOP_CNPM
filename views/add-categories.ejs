@@ -152,12 +152,13 @@
                                     <label for="validationServer01" class="form-label">Tên danh mục:</label>
                                     <input type="text" name="name" class="form-control" id="validationServer01"
                                         value="" required/>
+                                    <div id="validationError"></div>
                                 </div>
                                 <label for="formFileMultiple" style="margin: 0 15px;" class="form-label">Ảnh mô tả (*.jpg)</label>
                                 <input class="form-control mb-3 mt-1" style="margin: 0 15px; display: inline-block;"
                                     type="file" id="formFileMultiple" name="thumbnail" required/>
                                 <div class="col-12">
-                                    <button class="btn btn-primary mt-3" type="submit">
+                                    <button class="btn btn-primary mt-3" type="submit" onclick="checkValidateAddCategory(event)">
                                         Thêm danh mục
                                     </button>
                                 </div>
@@ -188,6 +189,28 @@
     <!-- main js -->
     <script src="/public/assets/libs/js/main-js.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+   <script>
+        function checkValidateAddCategory(event){
+            var checkName = document.getElementById("validationServer01").value;
+            var checkNameError = document.getElementById("validationError");
+
+            if(checkName == ''){
+                event.preventDefault();
+                checkNameError.innerHTML = "Vui lòng nhập đủ thông tin"
+                checkNameError.classList.add("errorText");
+            }
+            else if(checkName.length > 25){
+                event.preventDefault();
+                checkNameError.innerHTML = "Độ dài quá 25 ký tự"
+                checkNameError.classList.add("errorText");
+            }
+        }
+    </script>
+    <style>
+        .errorText{
+            color:red;
+        }
+    </style>
 </body>
 
 </html>
