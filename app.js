@@ -123,7 +123,7 @@ app.use(express.json({ limit: "30mb" }));
 app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "/")));
-
+ 
 // Router
 app.use("/", index);
 app.use('/admin', admin);
